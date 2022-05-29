@@ -11,6 +11,7 @@ export default TextButton = props => {
       <Text style={styles.label}>{props?.label}</Text>
       <View style={styles.container}>
       <TextInput    
+      {...props}
       secureTextEntry={props.secureTextEntry}
       placeholder={props.placeholder}/>
       </View>
