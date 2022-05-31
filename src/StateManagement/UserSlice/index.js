@@ -42,6 +42,38 @@ export const LoginUser = createAsyncThunk(
   },
 );
 
+// getProfile THUNK
+export const GetProfile = createAsyncThunk(
+  'users/profile',
+  async (_, {dispatch}) => {
+    dispatch(showLoader());
+
+    try {
+      let response;
+      await Api.get(endpoints.profile.getProfile, false)
+        .then(res => {
+          console.log('responseee profille',res)
+          response = res;
+          // showToast(res);
+          dispatch(hideLoader());
+        })
+        .catch(e => {
+          dispatch(hideLoader());
+
+          setTimeout(() => {
+            showToast(e);
+          }, 500);
+          throw new Error(e);
+        });
+      return response;
+    } catch (error) {
+      // dispatch(hideLoader());
+
+      throw new Error(error);
+    }
+  },
+);
+
 
 // REGISTER USER THUNK
 export const RegisterUser = createAsyncThunk(
@@ -120,7 +152,11 @@ export const userSlice = createSlice({
       state.token = payload.token;
       state.loading = false;
     },
-  
+    [GetProfile.fulfilled]: (state, {payload}) => {
+      console.log('GetProfile  payload', payload,state);
+      state.user = payload;
+      state.loading = false;
+    },
     [LoginUser.pending]: state => {
       state.loading = true;
     },

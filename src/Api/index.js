@@ -26,7 +26,7 @@ export const get = async (endpoint, queryParams = false) => {
   const url = base_url + endpoint + dataToQueryParameter(queryParams);
   const configs = getConfigs('GET');
 
-  // console.log('url ',url);
+  console.log('url ',url);
 
   try {
     const networkResult = await performNetworkRequest(url, configs);

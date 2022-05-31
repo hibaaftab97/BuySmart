@@ -119,7 +119,7 @@ export const getConfigs = (method, body, formData = false) => {
     if (data.user?.token) {
       if (data.user?.token != null) {
         if (data.user?.token) {
-          headers['Authorization'] = 'Bearer ' + data?.user?.token;
+          headers['auth-token'] =  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjkzYTg5YmZhOTJjNTIyMDEyNmJlMjciLCJpYXQiOjE2NTM4NDQzMDh9.S-wSUtGL_FvdeiA5iDjU3kg60e3M8ofI4armDRpy524";
         }
       }
     }

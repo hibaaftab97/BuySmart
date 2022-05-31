@@ -1,15 +1,52 @@
-import React from 'react';
-import { View, Image, TouchableOpacity, ImageBackground, Text } from 'react-native';
+import React, { useEffect, useState, } from 'react';
+import { View, Image, TouchableOpacity, ImageBackground, Text, ScrollView } from 'react-native';
 import styles from './styles';
-import Button from '../../components/Button'
 import LabelText from '../../components/Text'
-import Input from '../../components/Input'
-
+import { GetProfile,selectUser, } from '../../StateManagement/UserSlice/index';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { images } from '../../assets/images'
 import { vh, vw } from '../../utils/units';
 
 const Login = props => {
+
+    const [profile,setProfile]=useState({})
+    const [refreshing, setRefreshing] = React.useState(false);
+    const dispatch = useDispatch();
+    const user = useSelector(selectUser);
+    useEffect(()=>{
+        dispatch(
+            GetProfile(),
+        )
+            .then(res => {
+    console.log('=====data',res)
+    // setProfile(res)
+              
+            })
+            .catch(e => console.log('error in catch promise', e));
+    },[]);
+    // const onRefresh = React.useCallback(() => {
+    //     setRefreshing(true);
+    //     dispatch(
+    //         GetProfile(),
+    //     )
+    //         .then(res => {
+    // console.log('=====data',res)
+    // setRefreshing(false);
+
+    // // setProfile(res)
+              
+    //         })
+    //         .catch(e => console.log('error in catch promise', e));
+    //   }, []);
+    
+    console.log(user, 'user in myProfile');
     return (
+        <ScrollView  refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={onRefresh}
+            />
+          }>
         <ImageBackground source={images.bg}
             style={styles.container}>
                 <View   style={{alignItems:'center'}}>
@@ -56,6 +93,7 @@ const Login = props => {
 
             </View>
         </ImageBackground>
+        </ScrollView>
     );
 };
 

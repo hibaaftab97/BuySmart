@@ -9,11 +9,14 @@ import { connect, useDispatch, useSelector } from 'react-redux';
 import { showToast, validateEmail } from '../../utils';
 import { images } from '../../assets/images'
 import { vh } from '../../utils/units';
+import {store} from '../../StateManagement/store';
+
 
 const Login = props => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const dispatch = useDispatch();
+    const data = store.getState();
 
     const handleLogin = async () => {
        
@@ -41,7 +44,9 @@ const Login = props => {
             }),
         )
             .then(res => {
-                if (res.token) {
+    console.log('=====data',res)
+
+                if (data?.user?.token) {
                     props.navigation.navigate('ShopStackNavigator');
                 }
                 else {

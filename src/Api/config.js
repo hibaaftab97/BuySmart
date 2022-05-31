@@ -14,7 +14,7 @@ export const urls = {
     },
 
     profile: {
-      getProfile: '/user',
+      getProfile: '/users/profile',
     },
   
    
