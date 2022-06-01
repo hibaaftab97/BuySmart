@@ -9,6 +9,7 @@ export const icons = {
     team: require('../icons/team.png'),
     time1: require('../icons/time1.jpeg'),
     p1: require('../icons/p1.png'),
+    registershop: require('../icons/registershop.png'),
 
 
   };

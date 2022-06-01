@@ -14,15 +14,8 @@ const Login = props => {
     const dispatch = useDispatch();
     const user = useSelector(selectUser);
     useEffect(()=>{
-        dispatch(
-            GetProfile(),
-        )
-            .then(res => {
-    console.log('=====data',res)
-    // setProfile(res)
-              
-            })
-            .catch(e => console.log('error in catch promise', e));
+        dispatch(GetProfile());
+         
     },[]);
     // const onRefresh = React.useCallback(() => {
     //     setRefreshing(true);
@@ -41,59 +34,54 @@ const Login = props => {
     
     console.log(user, 'user in myProfile');
     return (
-        <ScrollView  refreshControl={
-            <RefreshControl
-              refreshing={refreshing}
-              onRefresh={onRefresh}
-            />
-          }>
+       
         <ImageBackground source={images.bg}
-            style={styles.container}>
-                <View   style={{alignItems:'center'}}>
-                <Image source={images.use}
-                style={styles.img} />
-            <LabelText title="Your Name" />
-                </View>
+        style={styles.container}>
+            <View   style={{alignItems:'center'}}>
+            <Image source={images.use}
+            style={styles.img} />
+        <LabelText title="Your Name" />
+            </View>
+      
+
+        <View style={{ marginTop: 5 * vh,paddingHorizontal:8*vw, }}>
+            <LabelText title="Full Name" />
+
+            <LabelText title={user?.name} textStyle={{ color: 'grey' }} />
+
+
+            <View style={{ marginTop: 3 * vh }}>
+                <LabelText title="Email Address" />
+
+                <LabelText title={user?.email} textStyle={{ color: 'grey' }} />
+            </View>
+
+            <View style={{ marginTop: 3 * vh }}>
+                <LabelText title="Registration ID" />
+
+                <LabelText title="123456" textStyle={{ color: 'grey' }} />
+            </View>
+            <View style={{ marginTop: 3 * vh }}>
+                <LabelText title="Contact Number" />
+
+                <LabelText title={user?.phone} textStyle={{ color: 'grey' }} />
+            </View>
+            <View style={{ marginTop: 3 * vh }}>
+                <LabelText title="Designation" />
+
+                <LabelText title="123456" textStyle={{ color: 'grey' }} />
+            </View>
+            <View style={{ marginTop: 3 * vh }}>
+                <LabelText title="Address" />
+
+                <LabelText title="test" textStyle={{ color: 'grey' }} />
+            </View>
           
 
-            <View style={{ marginTop: 5 * vh,paddingHorizontal:8*vw, }}>
-                <LabelText title="Full Name" />
 
-                <LabelText title="Test" textStyle={{ color: 'grey' }} />
-
-
-                <View style={{ marginTop: 3 * vh }}>
-                    <LabelText title="Email Address" />
-
-                    <LabelText title="Test@mailinator.com" textStyle={{ color: 'grey' }} />
-                </View>
-
-                <View style={{ marginTop: 3 * vh }}>
-                    <LabelText title="Registration ID" />
-
-                    <LabelText title="123456" textStyle={{ color: 'grey' }} />
-                </View>
-                <View style={{ marginTop: 3 * vh }}>
-                    <LabelText title="Contact Number" />
-
-                    <LabelText title="123456" textStyle={{ color: 'grey' }} />
-                </View>
-                <View style={{ marginTop: 3 * vh }}>
-                    <LabelText title="Designation" />
-
-                    <LabelText title="123456" textStyle={{ color: 'grey' }} />
-                </View>
-                <View style={{ marginTop: 3 * vh }}>
-                    <LabelText title="Address" />
-
-                    <LabelText title="test" textStyle={{ color: 'grey' }} />
-                </View>
-              
-
-
-            </View>
-        </ImageBackground>
-        </ScrollView>
+        </View>
+    </ImageBackground>
+        // </ScrollView>
     );
 };
 

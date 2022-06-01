@@ -17,7 +17,7 @@ const Login = props => {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [type, setType] = useState(1)
+    const [type, setType] = useState(0)
 
     const dispatch = useDispatch();
 
@@ -62,8 +62,16 @@ const Login = props => {
             }),
         )
             .then(res => {
-                if (res.message === 'Email already exists') {
-                    props.navigation.navigate('LoginCustomerScreen');
+                console.log('resresresres',res);
+                if (res.payload.message === 'User Registered Successfully') {
+                    if(type==0){
+                    props.navigation.navigate('RegisterShopScreen');
+                        
+                    }
+                    else{
+                        props.navigation.navigate('LoginCustomerScreen');
+
+                    }
                 }
                 else {
                     showToast(res.message)
@@ -132,9 +140,9 @@ const Login = props => {
                         <View>
                             <View style={{ flexDirection: 'row' }}>
                                 <TouchableOpacity
-                                    onPress={() => setType(1)}
-                                    style={[styles.circle, { borderColor: type == 1 ? '#8BC34A' : 'grey' }]}>
-                                    {type == 1 && <View style={styles.innercircle}>
+                                    onPress={() => setType(0)}
+                                    style={[styles.circle, { borderColor: type == 0 ? '#8BC34A' : 'grey' }]}>
+                                    {type == 0 && <View style={styles.innercircle}>
 
                                     </View>}
                                 </TouchableOpacity>
@@ -147,9 +155,9 @@ const Login = props => {
                         <View>
                             <View style={{ flexDirection: 'row', marginLeft: 4 * vw }}>
                                 <TouchableOpacity
-                                    onPress={() => setType(2)}
-                                    style={[styles.circle, { borderColor: type == 2 ? '#8BC34A' : 'grey' }]}>
-                                    {type == 2 && <View style={styles.innercircle}>
+                                    onPress={() => setType(1)}
+                                    style={[styles.circle, { borderColor: type == 1 ? '#8BC34A' : 'grey' }]}>
+                                    {type == 1 && <View style={styles.innercircle}>
 
                                     </View>}
                                 </TouchableOpacity>

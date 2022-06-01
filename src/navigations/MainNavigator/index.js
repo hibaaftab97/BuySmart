@@ -12,7 +12,7 @@ const MainNavigator = () => {
 
   return (
     <RootStack.Navigator screenOptions={{headerShown: false}}>
-      {/* <RootStack.Screen name="AuthNavigator" component={AuthNavigator} /> */}
+      <RootStack.Screen name="AuthNavigator" component={AuthNavigator} />
       <RootStack.Screen name="ShopStackNavigator" component={ShopStackNavigator} />
       <RootStack.Screen name="VendorNavigator" component={VendorNavigator} />
 
