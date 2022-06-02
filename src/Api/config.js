@@ -17,9 +17,12 @@ export const endpoints = {
   },
   profile: {
     getProfile: '/users/profile',
+    about:'/users/about',
+    contact:'/users/contactAdmin'
   },
 customer:{
-  shops:"/shops"
+  shops:"/shops",
+  
 }
 
 };
