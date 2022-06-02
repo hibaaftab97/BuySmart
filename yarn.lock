@@ -795,6 +795,11 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@estimote/react-native-proximity@^0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@estimote/react-native-proximity/-/react-native-proximity-0.6.0.tgz#9f2704cfc975dd59d3105c346e5f80c401279d4e"
+  integrity sha512-q3yrk6Cg/zHX0p7WrCYTbditgFl7DP7tjtzRItTYONeiVO4FRivMnLIX+Ulo3cMLCAgNSaNy4rr9XX1Cu3nkQQ==
+
 "@hapi/hoek@^9.0.0":
   version "9.3.0"
   resolved "https://registry.npmjs.org/@hapi/hoek/-/hoek-9.3.0.tgz"

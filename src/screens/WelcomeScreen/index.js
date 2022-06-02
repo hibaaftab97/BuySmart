@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Image, TouchableOpacity, ImageBackground, Text } from 'react-native';
 import styles from './styles';
 import Button from '../../components/Button'
@@ -6,8 +6,12 @@ import LabelText from '../../components/Text'
 
 import { images } from '../../assets/images'
 import { vh } from '../../utils/units';
+import { startProximityObserver } from '../../estimode';
 
 const Login = props => {
+    useEffect(() => {
+        startProximityObserver()
+    })
     return (
         <ImageBackground source={images.bg}
             style={styles.container}
@@ -22,10 +26,10 @@ const Login = props => {
                 />
                 <View style={{ marginTop: 4 * vh }}>
                     <Button title="VENDOR"
-                    onPress={()=>props.navigation.navigate('LoginVendorScreen')}
+                        onPress={() => props.navigation.navigate('LoginVendorScreen')}
                     />
                     <Button title="CUSTOMER"
-                    onPress={()=>props.navigation.navigate('LoginCustomerScreen')}
+                        onPress={() => props.navigation.navigate('LoginCustomerScreen')}
                         style={{ marginTop: 1 * vh }} />
                 </View>
 
