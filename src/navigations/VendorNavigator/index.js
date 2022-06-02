@@ -14,7 +14,7 @@ const ShopStack = createNativeStackNavigator();
 const ShopStackNavigator = () => {
   return (
     <ShopStack.Navigator screenOptions={{headerShown: false}}>
-      <ShopStack.Screen name="ShopDashboardScreen" component={VendorDashboardScreen} />
+      <ShopStack.Screen name="VendorDashboardScreen" component={VendorDashboardScreen} />
       <ShopStack.Screen name="ContactUsScreen" component={ContactUs} />
       <ShopStack.Screen name="TeamScreen" component={TeamScreen} />
       <ShopStack.Screen name="AboutusScreen" component={AboutusScreen} />

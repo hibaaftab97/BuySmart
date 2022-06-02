@@ -13,13 +13,17 @@ export const endpoints = {
 
   },
   vendor: {
-    registershop: "/shops/register"
+    registershop: "/shops/register",
+    updatestatus:'/shops/setShopStatus'
   },
   profile: {
     getProfile: '/users/profile',
+    about:'/users/about',
+    contact:'/users/contactAdmin'
   },
 customer:{
-  shops:"/shops"
+  shops:"/shops",
+  
 }
 
 };

@@ -4,12 +4,20 @@ import styles from './styles';
 import Button from '../../components/Button'
 import LabelText from '../../components/Text'
 import Input from '../../components/Input'
+import { updateStatus } from '../../StateManagement/VendorSlice/index';
+import { connect, useDispatch, useSelector } from 'react-redux';
+import { selectUser, } from '../../StateManagement/UserSlice/index';
 
 import { images } from '../../assets/images'
 import { vh, vw } from '../../utils/units';
 
 const Login = props => {
     const [activeindex, setIndex] = useState(0)
+    const dispatch = useDispatch();
+    const [shopstatus,setStatus]=useState('Available')
+    const user = useSelector(selectUser);
+
+
     const status = [{
         title: "Available"
     },
@@ -24,7 +32,29 @@ const Login = props => {
     }
     ]
 
-
+const update=async()=>{
+    dispatch(
+        updateStatus({
+            
+            status:shopstatus,
+            shop_id:user?.shop_id
+        }),
+    )
+        .then(res => {
+            console.log('resresresres',res);
+            if (res.payload?.shop_data) {
+                
+                props.navigation.pop()
+                    
+                
+                
+            }
+            else {
+                // showToast(res.message)
+            }
+        })
+        .catch(e => console.log('error in catch promise', e));
+}
     return (
         <ImageBackground source={images.bg}
             style={styles.container}
@@ -47,7 +77,12 @@ const Login = props => {
                         <View>
                             <View style={{ flexDirection: 'row', marginTop: 3 * vh }}>
                                 <TouchableOpacity
-                                    onPress={() => setIndex(index)}
+                                    onPress={() => 
+                                        {
+                                            setIndex(index)
+                                            setStatus(item?.title)
+                                        }
+                                       }
                                     style={[styles.circle, { borderColor: activeindex == index ? '#8BC34A' : 'grey' }]}>
                                     {activeindex == index && <View style={styles.innercircle}>
 
@@ -68,7 +103,9 @@ const Login = props => {
 
                 <Button title="SAVE"
                 style={{marginTop:4*vh}}
-                    onPress={() => props?.navigation.pop()} />
+                    onPress={() =>
+                        update()
+               } />
                 
 
             </View>

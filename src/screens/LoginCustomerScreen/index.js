@@ -46,7 +46,7 @@ const Login = props => {
             .then(res => {
                 console.log('=====data', res)
 
-                if (res?.payload?.token&& res?.payload?.user_data?.type==0) {
+                if (res?.payload?.token&& res?.payload?.user_data?.type==1) {
                     props.navigation.navigate('ShopStackNavigator');
                 }
                 else {

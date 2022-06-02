@@ -9,7 +9,7 @@ import {hideLoader, showLoader} from '../LoaderSlice';
 export const registerShop = createAsyncThunk(
     'shops/register',
     async ({name, description,status}, {dispatch}) => {
-      
+   
       dispatch(showLoader());
       try {
         let response;
@@ -42,6 +42,41 @@ export const registerShop = createAsyncThunk(
       }
     },
   );
+export const updateStatus = createAsyncThunk(
+  'shops/setShopStatus',
+  async ({shop_id, status}, {dispatch}) => {
+ 
+    dispatch(showLoader());
+    try {
+      let response;
+      await Api.post(
+        endpoints.vendor.updatestatus,
+        {
+          shop_id,
+          status
+        },
+        false,
+      )
+        .then(res => {
+          response = res;
+          dispatch(hideLoader());
+          showToast(res);
+        })
+        .catch(e => {
+          dispatch(hideLoader());
+          setTimeout(() => {
+            showToast(e);
+          }, 500);
+          throw new Error(e);
+        });
+
+      console.log('response here', response);
+      return response;
+    } catch (error) {
+      throw new Error(error);
+    }
+  },
+);
   export const vendorSlice = createSlice({
     name: 'user',
     initialState: {

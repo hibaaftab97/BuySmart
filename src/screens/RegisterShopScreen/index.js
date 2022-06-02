@@ -9,6 +9,7 @@ import { connect, useDispatch, useSelector } from 'react-redux';
 import { images } from '../../assets/images'
 import { vh, vw } from '../../utils/units';
 import { showToast, } from '../../utils';
+import { GetProfile, selectUser, } from '../../StateManagement/UserSlice/index';
 
 
 const Login = props => {
@@ -16,7 +17,7 @@ const Login = props => {
     const dispatch = useDispatch();
     const [name, setName] = useState('');
     const [description, setdescription] = useState('');
-    const [shopstatus, setstatus] = useState('');
+    const [shopstatus, setstatus] = useState('Available');
 
     const status = [{
         title: "Available"
@@ -43,7 +44,7 @@ const Login = props => {
             return;
         }
 
-
+else{
 
         dispatch(
             registerShop({
@@ -54,8 +55,10 @@ const Login = props => {
             }),
         )
             .then(res => {
-                if (res.message === 'Shop Registered Successfully') {
-                    props.navigation.navigate('LoginVendorScreen');
+                console.log('ressss',res)
+                if (res?.payload?.message === 'Shop Registered Successfully') {
+                    
+                    props.navigation.navigate('VendorNavigator');
 
                 }
                 else {
@@ -63,6 +66,7 @@ const Login = props => {
                 }
             })
             .catch(e => console.log('error in catch promise', e));
+        }
     };
     return (
         <ImageBackground source={images.bg}

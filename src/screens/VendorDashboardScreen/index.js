@@ -1,16 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Image, TouchableOpacity, ScrollView, ImageBackground, Text, FlatList } from 'react-native';
 import styles from './styles';
 import Button from '../../components/Button'
 import LabelText from '../../components/Text'
 import Input from '../../components/Input'
 import { images } from '../../assets/images'
-
+import { GetProfile, selectUser, } from '../../StateManagement/UserSlice/index';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { icons } from '../../assets/icons'
 import { vh, vw } from '../../utils/units';
+import { logout, } from '../../StateManagement/UserSlice/index';
+
 
 const Login = props => {
+    const dispatch = useDispatch();
+    const user = useSelector(selectUser);
 
+    useEffect(() => {
+        // dispatch(GetProfile());
+        console.log('useruseruseruser', user);
+    }, []);
     const menus = [{
         name: "Bluetooth",
         image: icons.bluetooth1
@@ -18,12 +27,12 @@ const Login = props => {
     {
         name: "SHOP Status",
         image: icons.time1,
-        route:"ShopStatusScreen"
+        route: "VendorStatusScreen"
     },
     {
         name: "My Profile",
         image: icons.profile1,
-        route:"ProfileScreen"
+        route: "ProfileScreen"
 
     },
     {
@@ -33,17 +42,17 @@ const Login = props => {
     {
         name: "About",
         image: icons.info1,
-        route:"AboutusScreen"
+        route: "AboutusScreen"
     },
     {
         name: "Contact Us",
         image: icons.contact1,
-        route:"ContactUsScreen"
+        route: "ContactUsScreen"
     },
     {
         name: "BuySmart Team",
         image: icons.team,
-        route:"TeamScreen"
+        route: "TeamScreen"
     },
     {
         name: "Rate Our App",
@@ -53,7 +62,7 @@ const Login = props => {
     const renderMenus = ({ item, index }) => {
         return (
             <TouchableOpacity style={{ width: '35%', alignItems: 'center' }}
-            onPress={()=>item?.route&& props.navigation.navigate(item?.route)}>
+                onPress={() => item?.route && props.navigation.navigate(item?.route)}>
                 <Image source={item?.image}
                     style={styles.img} />
                 <Text style={{ fontWeight: 'bold', fontSize: 2 * vh }}>{item?.name}</Text>
@@ -79,11 +88,17 @@ const Login = props => {
     }
     const footer = () => {
         return (
-            <View style={{ alignItems: 'center' }}>
+            <TouchableOpacity style={{ alignItems: 'center' }}
+                onPress={() =>
+                    {
+                        dispatch(logout())
+                        props.navigation.navigate('AuthNavigator')
+                        }
+                }>
                 <Image source={icons.logout1}
                     style={styles.img} />
                 <Text style={{ fontWeight: 'bold', fontSize: 2 * vh }}>Log Out</Text>
-            </View>
+            </TouchableOpacity>
         )
     }
     return (

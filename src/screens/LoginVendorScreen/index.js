@@ -7,7 +7,7 @@ import Input from '../../components/Input'
 import {store} from '../../StateManagement/store';
 import { images } from '../../assets/images'
 import { vh } from '../../utils/units';
-import { LoginUser } from '../../StateManagement/UserSlice/index';
+import { LoginUser,selectUser,GetProfile } from '../../StateManagement/UserSlice/index';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { showToast, validateEmail } from '../../utils';
 
@@ -15,11 +15,13 @@ const Login = props => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const user = useSelector(selectUser);
+
     const dispatch = useDispatch();
     const data = store.getState();
 
     const handleLogin = async () => {
-
+console.log('handleLoginhandleLoginhandleLoginhandleLoginhandleLoginhandleLogin')
         if (email == '') {
             showToast('Please Enter a Valid email');
             return;
@@ -44,10 +46,11 @@ const Login = props => {
             }),
         )
             .then(res => {
-                console.log('=====data', res)
+                console.log('=====datauseruseruseruser', res)
 
-                if (data?.user?.token&&data?.user?.user_data?.type==1) {
-                    props.navigation.navigate('VendorNavigator');
+                if (res?.payload?.token&& res?.payload?.user_data?.type===0) {
+                    dispatch(GetProfile());
+                    props.navigation.navigate('RegisterShopScreen');
                 }
                 else {
                 }

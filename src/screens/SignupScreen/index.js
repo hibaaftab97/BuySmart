@@ -65,7 +65,7 @@ const Login = props => {
                 console.log('resresresres',res);
                 if (res.payload.message === 'User Registered Successfully') {
                     if(type==0){
-                    props.navigation.navigate('RegisterShopScreen');
+                    props.navigation.navigate('LoginVendorScreen');
                         
                     }
                     else{
