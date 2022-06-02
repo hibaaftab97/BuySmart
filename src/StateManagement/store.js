@@ -5,18 +5,14 @@ import {persistReducer,persistStore} from 'redux-persist';
 import thunk from 'redux-thunk';
 import LoaderSlice from './LoaderSlice';
 import UserSlice from './UserSlice';
+import VendorSlice from './VendorSlice';
+
 
 const reducers = combineReducers({
   user: UserSlice,
   loader: LoaderSlice,
-//   trainer: TrainerSlice,
-  // event: EventSlice,
-  // friend: FriendSlice,
-  // home: HomeSlice,
-  // product: ProductSlice,
-  // session: SessionSlice,
+  Vendor:VendorSlice
 
-  //   labTechnician: LabTechnicianSlice,
 });
 
 const persistedConfig = {

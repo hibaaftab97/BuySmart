@@ -241,12 +241,13 @@ export const userSlice = createSlice({
     // },
     logout: state => {
       state.user = null;
+      state.token=""
     },
   },
   extraReducers: {
     [LoginUser.fulfilled]: (state, {payload}) => {
-      // console.log('payload', payload.user)
-      state.user = payload.user;
+      console.log('payload', payload.user)
+      state.user = payload.user_data;
       state.token = payload.token;
       state.loading = false;
     },
@@ -269,6 +270,8 @@ export const userSlice = createSlice({
 export const {login, logout} = userSlice.actions;
 
 export const selectUser = state => state.user?.user;
+export const getUser = state => state.user
+
 //  pehla user is slice - reducer
 // second one is state
 

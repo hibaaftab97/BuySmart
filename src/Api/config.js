@@ -13,7 +13,8 @@ export const endpoints = {
 
   },
   vendor: {
-    registershop: "/shops/register"
+    registershop: "/shops/register",
+    updatestatus:'/shops/setShopStatus'
   },
   profile: {
     getProfile: '/users/profile',

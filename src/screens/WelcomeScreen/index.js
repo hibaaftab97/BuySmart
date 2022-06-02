@@ -3,11 +3,14 @@ import { View, Image, TouchableOpacity, ImageBackground, Text } from 'react-nati
 import styles from './styles';
 import Button from '../../components/Button'
 import LabelText from '../../components/Text'
+import {store} from '../../StateManagement/store';
 
 import { images } from '../../assets/images'
 import { vh } from '../../utils/units';
 
 const Login = props => {
+    const data = store.getState();
+console.log('data',data)
     return (
         <ImageBackground source={images.bg}
             style={styles.container}
