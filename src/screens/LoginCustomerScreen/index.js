@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import { View, Image, TouchableOpacity, ImageBackground, Text } from 'react-native';
 import styles from './styles';
 import Button from '../../components/Button'
@@ -9,7 +9,7 @@ import { connect, useDispatch, useSelector } from 'react-redux';
 import { showToast, validateEmail } from '../../utils';
 import { images } from '../../assets/images'
 import { vh } from '../../utils/units';
-import {store} from '../../StateManagement/store';
+import { store } from '../../StateManagement/store';
 
 
 const Login = props => {
@@ -19,7 +19,7 @@ const Login = props => {
     const data = store.getState();
 
     const handleLogin = async () => {
-       
+
         if (email == '') {
             showToast('Please Enter a Valid email');
             return;
@@ -28,8 +28,8 @@ const Login = props => {
             showToast('Please Enter a password');
             return;
         }
-       
-       
+
+
         else if (!validateEmail(email)) {
             showToast('Please Enter a Valid Email');
             return;
@@ -40,13 +40,13 @@ const Login = props => {
             LoginUser({
                 email: email,
                 password: password,
-            
+
             }),
         )
             .then(res => {
-    console.log('=====data',res)
+                console.log('=====data', res)
 
-                if (data?.user?.token) {
+                if (res?.payload?.token&& res?.payload?.user_data?.type==0) {
                     props.navigation.navigate('ShopStackNavigator');
                 }
                 else {
@@ -87,10 +87,9 @@ const Login = props => {
                     />
                 </TouchableOpacity>
                 <View style={{ marginTop: 4 * vh }}>
-                    <Button title="LOGIN" 
-                    
-                    onPress={() => 
-                        {handleLogin()}
+                    <Button title="LOGIN"
+
+                        onPress={() => { handleLogin() }
                         }
                     />
                     <TouchableOpacity

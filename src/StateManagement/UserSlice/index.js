@@ -75,6 +75,38 @@ export const GetProfile = createAsyncThunk(
 );
 
 
+export const getAllshops = createAsyncThunk(
+  '/shops',
+  async (_, {dispatch}) => {
+    dispatch(showLoader());
+
+    try {
+      let response;
+      await Api.get(endpoints.customer.shops, false)
+        .then(res => {
+          console.log('responseee profille',res)
+          response = res;
+          // showToast(res);
+          dispatch(hideLoader());
+        })
+        .catch(e => {
+          dispatch(hideLoader());
+
+          setTimeout(() => {
+            showToast(e);
+          }, 500);
+          throw new Error(e);
+        });
+      return response;
+    } catch (error) {
+      // dispatch(hideLoader());
+
+      throw new Error(error);
+    }
+  },
+);
+
+
 // REGISTER USER THUNK
 export const RegisterUser = createAsyncThunk(
   'users/registerUser',
@@ -134,7 +166,7 @@ export const userSlice = createSlice({
   },
   reducers: {
     login: (state, action) => {
-      console.log(action.payload);
+      console.log('action.payload',action.payload);
       state.user = action.payload;
     },
     // signUp: (state, action) => {

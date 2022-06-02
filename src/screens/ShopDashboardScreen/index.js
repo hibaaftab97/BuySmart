@@ -18,7 +18,7 @@ const Login = props => {
     {
         name: "SHOP Status",
         image: icons.time1,
-        route:"VendorStatusScreen"
+        route:"ShopStatusScreen"
     },
     {
         name: "My Profile",

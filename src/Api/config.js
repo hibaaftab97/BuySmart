@@ -18,7 +18,9 @@ export const endpoints = {
   profile: {
     getProfile: '/users/profile',
   },
-
+customer:{
+  shops:"/shops"
+}
 
 };
 export default configs = {
