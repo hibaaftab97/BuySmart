@@ -25,12 +25,12 @@ const Login = props => {
 
 
 
-    
+
     const renderMenus = ({ item, index }) => {
         return (
-            <View   style={{marginTop:3*vh,alignItems:'center'}}>
+            <View style={{ marginTop: 3 * vh, alignItems: 'center' }}>
 
-                <LabelText title={item?.name} textStyle={{ fontWeight:'bold' }} />
+                <LabelText title={item?.name} textStyle={{ fontWeight: 'bold' }} />
 
 
                 <View style={{ marginTop: 0 * vh }}>
@@ -41,43 +41,45 @@ const Login = props => {
         )
     }
 
+    const header = () => {
+        return (
+            <View>
+                <LabelText title="SHOP STATUS"
+                    textStyle={{
+                        fontWeight: 'bold',
+                        textAlign: 'center',
+                        marginTop: 7 * vh
+                    }} />
+                <View style={{ marginTop: 4 * vh, width: 85 * vw,alignItems:'center' }}>
+                    <LabelText title="Don't go anywhere, just check the availability of every SHOP IN MALL" />
+                </View>
+            </View>
+        )
+    }
+
     return (
         <ImageBackground source={images.bg}
             style={styles.container}
             imageStyle={styles.container}>
 
-            <LabelText title="SHOP STATUS"
-                textStyle={{
-                    fontWeight: 'bold',
+            <View style={{ alignItems: 'center', }}>
 
-                    marginTop: 7 * vh
-                }} />
+                <View style={{ marginTop: 0 * vh, }}>
 
-            <View style={{ alignItems: 'center', width: 95 * vw }}>
-
-
-                <View style={{ marginTop: 4 * vh, }}>
-                    <LabelText title="Don't go anywhere, just check the availability of every SHOP IN MALL" />
-
-
-                    <View style={{ marginTop: 5 * vh, paddingHorizontal: 8 * vw, }}>
-
-                        <FlatList data={shops}
+                    <FlatList data={shops}
+                        showsVerticalScrollIndicator={false}
+                        style={{
+                        }}
+                        ListHeaderComponent={header}
+                        contentContainerStyle={{
+                            alignItems: 'center',
+                        }}
+                        keyExtractor={(item) => item._id}
+                        renderItem={renderMenus}
+                    />
 
 
-
-                            contentContainerStyle={{
-                                alignItems: 'center',
-                            }}
-                            keyExtractor={(item) => item.id}
-                            renderItem={renderMenus}
-                        />
-
-
-                    </View>
                 </View>
-
-
 
             </View>
         </ImageBackground>

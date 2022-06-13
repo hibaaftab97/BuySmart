@@ -10,6 +10,8 @@ import { connect, useDispatch, useSelector } from 'react-redux';
 import { icons } from '../../assets/icons'
 import { vh, vw } from '../../utils/units';
 import { logout, } from '../../StateManagement/UserSlice/index';
+import BluetoothStateManager from 'react-native-bluetooth-state-manager';
+
 
 
 const Login = props => {
@@ -37,7 +39,9 @@ const Login = props => {
     },
     {
         name: "Mall Map",
-        image: icons.map1
+        image: icons.map1,
+        route: "MapScreen"
+
     },
     {
         name: "About",
@@ -59,10 +63,24 @@ const Login = props => {
         image: icons.rate
     },
     ]
+
+    const onClick=(item)=>{
+        console.log('iteemmm',item);
+        if(item?.name=='Bluetooth'){
+            BluetoothStateManager.requestToEnable().then((result) => {
+                // result === true -> user accepted to enable bluetooth
+                // result === false -> user denied to enable bluetooth
+            })
+        }
+        else{
+            props.navigation.navigate(item?.route)
+          
+        }
+    }
     const renderMenus = ({ item, index }) => {
         return (
             <TouchableOpacity style={{ width: '35%', alignItems: 'center' }}
-                onPress={() => item?.route && props.navigation.navigate(item?.route)}>
+                onPress={()=>onClick(item)}>
                 <Image source={item?.image}
                     style={styles.img} />
                 <Text style={{ fontWeight: 'bold', fontSize: 2 * vh }}>{item?.name}</Text>
@@ -89,11 +107,10 @@ const Login = props => {
     const footer = () => {
         return (
             <TouchableOpacity style={{ alignItems: 'center' }}
-                onPress={() =>
-                    {
-                        dispatch(logout())
-                        props.navigation.navigate('AuthNavigator')
-                        }
+                onPress={() => {
+                    dispatch(logout())
+                    props.navigation.navigate('AuthNavigator')
+                }
                 }>
                 <Image source={icons.logout1}
                     style={styles.img} />

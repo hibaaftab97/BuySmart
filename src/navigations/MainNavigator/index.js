@@ -3,6 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import AuthNavigator from '../AuthNavigator';
 import ShopStackNavigator from '../ShopNavigator';
 import VendorNavigator from '../VendorNavigator';
+import MapScreen from '../../screens/MapScreen';
 
 
 const RootStack = createNativeStackNavigator();
@@ -15,6 +16,7 @@ const MainNavigator = () => {
       <RootStack.Screen name="AuthNavigator" component={AuthNavigator} />
       <RootStack.Screen name="ShopStackNavigator" component={ShopStackNavigator} />
       <RootStack.Screen name="VendorNavigator" component={VendorNavigator} />
+      <RootStack.Screen name="MapScreen" component={MapScreen} />
 
 
     </RootStack.Navigator>

@@ -10,11 +10,13 @@ import { GetProfile, getUser, } from '../../StateManagement/UserSlice/index';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { icons } from '../../assets/icons'
 import { vh, vw } from '../../utils/units';
+import BluetoothStateManager from 'react-native-bluetooth-state-manager';
+
 
 const Login = props => {
     const dispatch = useDispatch();
     const user = useSelector(getUser);
-    console.log('userrserrr',user)
+    console.log('userrserrr', user)
 
     const menus = [{
         name: "Bluetooth",
@@ -23,47 +25,63 @@ const Login = props => {
     {
         name: "SHOP Status",
         image: icons.time1,
-        route:"ShopStatusScreen"
+        route: "ShopStatusScreen"
     },
     {
         name: "My Profile",
         image: icons.profile1,
-        route:"CustomerProfileScreen"
+        route: "CustomerProfileScreen"
     },
     {
         name: "Mall Map",
-        image: icons.map1
+        image: icons.map1,
+        route: "MapScreen"
+
     },
     {
         name: "About",
         image: icons.info1,
-        route:"AboutusScreen"
+        route: "AboutusScreen"
     },
     {
         name: "Contact Us",
         image: icons.contact1,
-        route:"ContactUsScreen"
+        route: "ContactUsScreen"
     },
     {
         name: "BuySmart Team",
         image: icons.team,
-        route:"TeamScreen"
+        route: "TeamScreen"
     },
     {
         name: "Rate Our App",
         image: icons.rate
     },
     ]
+
+    const onClick = (item) => {
+        if(item?.name=='Bluetooth'){
+            BluetoothStateManager.requestToEnable().then((result) => {
+                // result === true -> user accepted to enable bluetooth
+                // result === false -> user denied to enable bluetooth
+            })
+        }
+        else{
+            props.navigation.navigate(item?.route)
+          
+        }
+    }
     const renderMenus = ({ item, index }) => {
         return (
             <TouchableOpacity style={{ width: '35%', alignItems: 'center' }}
-            onPress={()=>item?.route&& props.navigation.navigate(item?.route)}>
+                onPress={onClick}>
                 <Image source={item?.image}
                     style={styles.img} />
                 <Text style={{ fontWeight: 'bold', fontSize: 2 * vh }}>{item?.name}</Text>
             </TouchableOpacity>
         )
     }
+
     const header = () => {
         return (
             <View>
@@ -83,14 +101,13 @@ const Login = props => {
     }
     const footer = () => {
         return (
-            <TouchableOpacity 
-            onPress={() =>
-                {
-                dispatch(logout())
-                // props.navigation.navigate('AuthNavigator')
+            <TouchableOpacity
+                onPress={() => {
+                    dispatch(logout())
+                    props.navigation.navigate('AuthNavigator')
                 }
-            }
-            style={{ alignItems: 'center' }}>
+                }
+                style={{ alignItems: 'center' }}>
                 <Image source={icons.logout1}
                     style={styles.img} />
                 <Text style={{ fontWeight: 'bold', fontSize: 2 * vh }}>Log Out</Text>

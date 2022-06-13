@@ -46,11 +46,17 @@ console.log('handleLoginhandleLoginhandleLoginhandleLoginhandleLoginhandleLogin'
             }),
         )
             .then(res => {
-                console.log('=====datauseruseruseruser', res)
 
                 if (res?.payload?.token&& res?.payload?.user_data?.type===0) {
                     dispatch(GetProfile());
-                    props.navigation.navigate('RegisterShopScreen');
+                    if(res?.payload?.user_data?.shop_id){
+                        props.navigation.navigate('VendorNavigator');
+
+                    }
+                    else{
+                        props.navigation.navigate('RegisterShopScreen');
+
+                    }
                 }
                 else {
                 }
