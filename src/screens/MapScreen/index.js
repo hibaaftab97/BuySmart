@@ -84,13 +84,13 @@ const MapScreen = props => {
                 longitude: longitude,
                 latitudeDelta: 0.0922,
                 longitudeDelta: 0.0421,
-            }}>
-            <Marker
+              }}>
+            {/* <Marker
                 coordinate={{
                     latitude: latitude,
                     longitude: longitude,
                 }}>
-            </Marker>
+            </Marker> */}
         </MapView>
     );
 };

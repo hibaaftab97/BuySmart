@@ -60,6 +60,7 @@ const Login = props => {
     ]
 
     const onClick = (item) => {
+        console.log(item);
         if(item?.name=='Bluetooth'){
             BluetoothStateManager.requestToEnable().then((result) => {
                 // result === true -> user accepted to enable bluetooth
@@ -74,7 +75,7 @@ const Login = props => {
     const renderMenus = ({ item, index }) => {
         return (
             <TouchableOpacity style={{ width: '35%', alignItems: 'center' }}
-                onPress={onClick}>
+                onPress={()=>onClick(item)}>
                 <Image source={item?.image}
                     style={styles.img} />
                 <Text style={{ fontWeight: 'bold', fontSize: 2 * vh }}>{item?.name}</Text>

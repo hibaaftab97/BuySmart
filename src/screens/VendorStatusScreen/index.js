@@ -6,7 +6,7 @@ import LabelText from '../../components/Text'
 import Input from '../../components/Input'
 import { updateStatus } from '../../StateManagement/VendorSlice/index';
 import { connect, useDispatch, useSelector } from 'react-redux';
-import { selectUser, } from '../../StateManagement/UserSlice/index';
+import { selectUser,getUser } from '../../StateManagement/UserSlice/index';
 
 import { images } from '../../assets/images'
 import { vh, vw } from '../../utils/units';
@@ -15,8 +15,8 @@ const Login = props => {
     const [activeindex, setIndex] = useState(0)
     const dispatch = useDispatch();
     const [shopstatus,setStatus]=useState('Available')
-    const user = useSelector(selectUser);
-
+    const user = useSelector(getUser);
+console.log('userrr',user);
 
     const status = [{
         title: "Available"
@@ -37,7 +37,7 @@ const update=async()=>{
         updateStatus({
             
             status:shopstatus,
-            shop_id:user?.shop_id
+            shop_id:user?.user?.shop_id
         }),
     )
         .then(res => {
