@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
-import { View, Image, TouchableOpacity, ScrollView, ImageBackground, Text, FlatList } from 'react-native';
+import { View, Image, TouchableOpacity,
+    Linking,
+    ScrollView, ImageBackground, Text, FlatList, Platform, PermissionsAndroid } from 'react-native';
 import styles from './styles';
 import Button from '../../components/Button'
 import LabelText from '../../components/Text'
@@ -11,6 +13,7 @@ import { icons } from '../../assets/icons'
 import { vh, vw } from '../../utils/units';
 import { logout, } from '../../StateManagement/UserSlice/index';
 import BluetoothStateManager from 'react-native-bluetooth-state-manager';
+import BleManager from 'react-native-ble-manager';
 
 
 
@@ -67,14 +70,54 @@ const Login = props => {
     const onClick=(item)=>{
         console.log('iteemmm',item);
         if(item?.name=='Bluetooth'){
-            BluetoothStateManager.requestToEnable().then((result) => {
-                // result === true -> user accepted to enable bluetooth
-                // result === false -> user denied to enable bluetooth
-            })
+            BleManager.start({ showAlert: false });
+            // BluetoothStateManager.requestToEnable().then((result) => {
+
+
+            //     // result === true -> user accepted to enable bluetooth
+            //     // result === false -> user denied to enable bluetooth
+            // })
+            if (Platform.OS === 'android' && Platform.Version >= 23) {
+                PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION).then((result) => {
+                    if (result) {
+                        console.log("Permission is OK");
+                        BleManager.enableBluetooth()
+                            .then(() => {
+                                // Success code
+                                console.log("The bluetooth is already enabled or the user confirm");
+                            })
+                            .catch((error) => {
+                                // Failure code
+                                console.log("The user refuse to enable bluetooth");
+                            });
+
+                    } else {
+                        PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION).then((result) => {
+                            if (result) {
+                                console.log("User accept");
+                                BleManager.enableBluetooth()
+                                    .then(() => {
+                                        // Success code
+                                        console.log("The bluetooth is already enabled or the user confirm");
+                                    })
+                                    .catch((error) => {
+                                        // Failure code
+                                        console.log("The user refuse to enable bluetooth");
+                                    });
+                            } else {
+                                console.log("User refuse");
+                            }
+                        });
+                    }
+                });
+            }
         }
-        else{
+        else if(item?.name=='Rate Our App'){
+                    Linking.openURL('https://play.google.com/store/apps/details?id=com.facebook.katana&hl=en&gl=US')
+        }
+        else if(item?.route){
             props.navigation.navigate(item?.route)
-          
+
         }
     }
     const renderMenus = ({ item, index }) => {
@@ -96,11 +139,15 @@ const Login = props => {
                 }} />
                 <LabelText title="Explore whatever you want to!"
                 />
-                <View style={{ alignItems: 'center' }}>
+          <TouchableOpacity style={{ alignItems: 'center' }}
+                onPress={() => {
+                    props.navigation.navigate('Promotions')
+                }
+                }>
                     <Image source={icons.p1}
                         style={styles.img} />
                     <Text style={{ fontWeight: 'bold', fontSize: 2 * vh }}>PROMOTIONS</Text>
-                </View>
+                </TouchableOpacity>
             </View>
         )
     }

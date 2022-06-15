@@ -4,6 +4,8 @@ import AuthNavigator from '../AuthNavigator';
 import ShopStackNavigator from '../ShopNavigator';
 import VendorNavigator from '../VendorNavigator';
 import MapScreen from '../../screens/MapScreen';
+import Promotions from '../../screens/PromotionsScreen'
+
 
 
 const RootStack = createNativeStackNavigator();
@@ -17,6 +19,8 @@ const MainNavigator = () => {
       <RootStack.Screen name="ShopStackNavigator" component={ShopStackNavigator} />
       <RootStack.Screen name="VendorNavigator" component={VendorNavigator} />
       <RootStack.Screen name="MapScreen" component={MapScreen} />
+      <RootStack.Screen name="Promotions" component={Promotions} />
+
 
 
     </RootStack.Navigator>

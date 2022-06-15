@@ -14,7 +14,10 @@ export const endpoints = {
   },
   vendor: {
     registershop: "/shops/register",
-    updatestatus:'/shops/setShopStatus'
+    updatestatus:'/shops/setShopStatus',
+    uploadphotos:"/file/image",
+    getPhotos: '/users/profile',
+
   },
   profile: {
     getProfile: '/users/profile',

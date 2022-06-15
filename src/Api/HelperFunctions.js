@@ -1,6 +1,7 @@
 import {store} from '../StateManagement/store';
 import {EventRegister} from 'react-native-event-listeners';
 import Toast from 'react-native-simple-toast';
+import lodash from 'lodash'
 const TAG = '__API__';
 export const showToast = msg => {
   presentToast(getMessage(msg));
@@ -115,14 +116,13 @@ export const getConfigs = (method, body, formData = false) => {
     headers['Content-Type'] = 'multipart/form-data';
   }
   const data = store.getState();
+  console.log('dattt',data);
   if (data) {
-    if (data.user?.token) {
-      if (data.user?.token != null) {
-        if (data.user?.token) {
+    
+        if (!lodash.isEmpty(data.user?.token)) {
+         
           headers['auth-token'] =  data.user?.token;
         }
-      }
-    }
   }
   var configs = {
     method: method,

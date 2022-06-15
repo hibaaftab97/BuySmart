@@ -8,7 +8,6 @@ import VendorStatusScreen from '../../screens/VendorStatusScreen'
 import ProfileScreen from '../../screens/ProfileScreen'
 
 
-
 const ShopStack = createNativeStackNavigator();
 
 const ShopStackNavigator = () => {
@@ -18,6 +17,7 @@ const ShopStackNavigator = () => {
       <ShopStack.Screen name="ContactUsScreen" component={ContactUs} />
       <ShopStack.Screen name="TeamScreen" component={TeamScreen} />
       <ShopStack.Screen name="AboutusScreen" component={AboutusScreen} />
+
       <ShopStack.Screen name="VendorStatusScreen" component={VendorStatusScreen} />
 
       <ShopStack.Screen name="ProfileScreen" component={ProfileScreen} />

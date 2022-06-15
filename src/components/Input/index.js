@@ -8,7 +8,7 @@ export default TextButton = props => {
 
   return (
   <View>
-      <Text style={styles.label}>{props?.label}</Text>
+      {props?.label&&<Text style={styles.label}>{props?.label}</Text>}
       <View style={styles.container}>
       <TextInput    
       {...props}

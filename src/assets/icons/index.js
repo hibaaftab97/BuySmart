@@ -10,6 +10,10 @@ export const icons = {
     time1: require('../icons/time1.jpeg'),
     p1: require('../icons/p1.png'),
     registershop: require('../icons/registershop.png'),
+    camera: require('../icons/camera.png'),
+    gallery: require('../icons/gallery.png'),
+    removepicture: require('../icons/removepicture.png'),
+
 
 
   };

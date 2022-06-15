@@ -77,6 +77,73 @@ export const updateStatus = createAsyncThunk(
     }
   },
 );
+export const updatePhotos = createAsyncThunk(
+  'file/image',
+  async ({filename, image}, {dispatch}) => {
+ 
+    dispatch(showLoader());
+    try {
+      let response;
+      await Api.post(
+        endpoints.vendor.uploadphotos,
+        {
+          filename,
+          image
+        },
+        false,
+      )
+        .then(res => {
+          response = res;
+          dispatch(hideLoader());
+          showToast(res);
+        })
+        .catch(e => {
+          dispatch(hideLoader());
+          setTimeout(() => {
+            showToast(e);
+          }, 500);
+          throw new Error(e);
+        });
+
+      console.log('response here', response);
+      return response;
+    } catch (error) {
+      throw new Error(error);
+    }
+  },
+);
+
+// getProfile THUNK
+export const getPhotos = createAsyncThunk(
+  'file/image',
+  async (_, {dispatch}) => {
+    dispatch(showLoader());
+
+    try {
+      let response;
+      await Api.get(endpoints.vendor.uploadphotos, false)
+        .then(res => {
+          console.log('responseee profille',res)
+          response = res;
+          // showToast(res);
+          dispatch(hideLoader());
+        })
+        .catch(e => {
+          dispatch(hideLoader());
+
+          setTimeout(() => {
+            showToast(e);
+          }, 500);
+          throw new Error(e);
+        });
+      return response;
+    } catch (error) {
+      // dispatch(hideLoader());
+
+      throw new Error(error);
+    }
+  },
+);
   export const vendorSlice = createSlice({
     name: 'user',
     initialState: {
